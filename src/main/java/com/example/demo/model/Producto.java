@@ -20,11 +20,11 @@ public class Producto {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idPro;
-	@Column
+	@Column(nullable = false)
 	private String nombre;
-	@Column
+	@Column(nullable = false)
 	private double precio;
-	@Column
+	@Column(nullable = false)
 	private String tipo;
 	@Column
 	private String descripcion;
