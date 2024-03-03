@@ -15,9 +15,9 @@ public class ProductoServiceImp implements ProductoService {
 	private ProductoRepository repoPro;
 	
 	@Override
-	public void insert(Producto producto) {
-		repoPro.save(producto);
-		
+	public Producto insert(Producto producto) {
+	return 	repoPro.save(producto);
+
 	}
 
 
@@ -41,9 +41,9 @@ public class ProductoServiceImp implements ProductoService {
 	}
 
 	@Override
-	public void update(Producto producto, Integer idPro) {
+	public Producto update(Producto producto, Integer idPro) {
 		producto.setIdPro(idPro);
-		repoPro.save(producto);
+		return repoPro.save(producto);
 		
 	}
 

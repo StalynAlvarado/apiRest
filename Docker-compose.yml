@@ -1,0 +1,27 @@
+  version: "3.8"
+  services:
+
+    dbmysql:
+      container_name: "probar"
+      image: "mysql:8.0.33"
+      ports:
+        - "3307:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: "123admin"
+        MYSQL_DATABASE: "dbRend"
+
+    app:
+      container_name: "restcontainer"
+      build: .
+      ports:
+        - "8097:8097"
+      environment:
+        - DATABASE_URL=jdbc:mysql://dbmysql:3306/dbRend
+        - DATABASE_USERNAME=root
+        - DATABASE_PASSWORD=123admin
+      depends_on:
+        - dbmysql
+
+  volumes:
+   mi_data:
+
