@@ -2,17 +2,20 @@ package com.example.demo.service;
 
 import java.util.Collection;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Producto;
 import com.example.demo.repository.ProductoRepository;
 
 @Service
+@RequiredArgsConstructor
 public class ProductoServiceImp implements ProductoService {
 
-	@Autowired
-	private ProductoRepository repoPro;
+
+	private final ProductoRepository repoPro;
 	
 	@Override
 	public Producto insert(Producto producto) {
@@ -34,11 +37,10 @@ public class ProductoServiceImp implements ProductoService {
 	}
 
 	@Override
-	public Collection<Producto> findAll() {
-
-	return (Collection<Producto>)repoPro.findAll();
-
+	public Page<Producto> findAll(Pageable pageable) {
+		return repoPro.findAll(pageable);
 	}
+
 
 	@Override
 	public Producto update(Producto producto, Integer idPro) {

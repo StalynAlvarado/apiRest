@@ -1,8 +1,8 @@
 package com.example.demo.service;
 
-import java.util.Collection;
-
 import com.example.demo.model.Producto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface ProductoService {
 
@@ -10,6 +10,6 @@ public interface ProductoService {
 	 Producto update(Producto producto,Integer idPro);
 	 void delete(Integer idPro);
 	 Producto findById(Integer idPro);
-	 Collection<Producto>findAll();
+	Page<Producto> findAll(Pageable pageable);
 	
 }

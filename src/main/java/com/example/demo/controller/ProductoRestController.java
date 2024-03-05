@@ -3,16 +3,13 @@ package com.example.demo.controller;
 import java.util.Collection;
 
 
+import org.hibernate.engine.jdbc.Size;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.model.Producto;
 import com.example.demo.service.ProductoService;
@@ -31,10 +28,11 @@ public class ProductoRestController {
 
 	private final ProductoService serProducto;
 	
-	@GetMapping("/listar")
-	public ResponseEntity<Collection<Producto>>listar(){
-		Collection<Producto>iProducto=serProducto.findAll();
-		return new ResponseEntity<>(iProducto,HttpStatus.OK);
+	@GetMapping("/listar/{page}")
+	public ResponseEntity<Page<Producto>>listar(@RequestParam(defaultValue = "10") int size,@PathVariable("page") int page){
+
+		Page<Producto> pro =serProducto.findAll(PageRequest.of(page,size));
+		return  ResponseEntity.status(200).body(pro);
 		
 	}
 	 @GetMapping("/buscar/{idPro}")
