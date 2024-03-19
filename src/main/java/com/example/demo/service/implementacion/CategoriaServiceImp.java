@@ -1,7 +1,8 @@
-package com.example.demo.service;
+package com.example.demo.service.implementacion;
 
 import com.example.demo.model.Categoria;
 import com.example.demo.repository.CategoriaRepository;
+import com.example.demo.service.CategoriaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class CategoriaServiceImp implements CategoriaService{
+public class CategoriaServiceImp implements CategoriaService {
 
     private final CategoriaRepository repository;
 

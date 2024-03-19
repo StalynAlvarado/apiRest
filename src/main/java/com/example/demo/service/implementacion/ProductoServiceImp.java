@@ -1,7 +1,7 @@
-package com.example.demo.service;
+package com.example.demo.service.implementacion;
 
-import java.util.Collection;
 
+import com.example.demo.service.ProductoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +12,7 @@ import com.example.demo.repository.ProductoRepository;
 
 @Service
 @RequiredArgsConstructor
-public class ProductoServiceImp implements ProductoService {
+public class   ProductoServiceImp implements ProductoService {
 
 
 	private final ProductoRepository repoPro;
