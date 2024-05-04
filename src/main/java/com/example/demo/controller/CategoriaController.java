@@ -1,8 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.CategoriaDTO;
 import com.example.demo.model.Categoria;
 import com.example.demo.service.CategoriaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,39 +19,46 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CategoriaController {
 
-    public final CategoriaService service;
+
+    private final CategoriaService service;
+@Qualifier("default")
+    private final ModelMapper mapper;
+
 
     @GetMapping
-    public ResponseEntity<List<Categoria>> listar()throws Exception{
-
-      List<Categoria>list= service.findAll();
+    public ResponseEntity<List<CategoriaDTO>> listar()throws Exception{
+      List<CategoriaDTO> list= service.findAll()
+              .stream()
+              .map(c-> mapper.map(c, CategoriaDTO.class))
+              .toList();
         return  ResponseEntity.status(200).body(list);
     }
 
     @PostMapping
-    public ResponseEntity<Categoria> agregar(@RequestBody Categoria categoria)throws Exception{
+    public ResponseEntity<CategoriaDTO> agregar(@Valid @RequestBody CategoriaDTO categoria)throws Exception{
 
+       Categoria cat =service.insert(mapper.map(categoria,Categoria.class));
 
-       Categoria cat =service.insert(categoria);
-         return  ResponseEntity.status(201).body(cat);
+         return  ResponseEntity.status(201).body(mapper.map(cat,CategoriaDTO.class));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Categoria> actualizar(@RequestBody Categoria categoria,@PathVariable("id") Integer id)throws Exception{
+    public ResponseEntity<Categoria> actualizar(@Valid @RequestBody CategoriaDTO categoria,@PathVariable("id") Integer id)throws Exception{
 
-service.update(categoria,id);
+service.update(mapper.map(categoria, Categoria.class),id);
 return ResponseEntity.status(200).build();
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Optional<Categoria>>buscar(@PathVariable("id") Integer id)throws Exception{
+    public ResponseEntity<Optional<CategoriaDTO>>buscar(@PathVariable("id") Integer id)throws Exception{
 
-        Optional<Categoria> cat=service.findById(id);
-      return  ResponseEntity.status(200).body(cat);
+       Optional<Categoria> cat=service.findById(id);
+      return  ResponseEntity.status(200).body(Optional.ofNullable(mapper.map(cat, CategoriaDTO.class)));
 
     }
     @DeleteMapping("{id}")
-    public void eliminar(@PathVariable("id")Integer id)throws Exception{
+    public ResponseEntity<Void>eliminar(@PathVariable("id")Integer id)throws Exception{
         service.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

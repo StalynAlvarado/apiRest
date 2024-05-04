@@ -1,8 +1,12 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.ClienteDTO;
 import com.example.demo.model.Cliente;
 import com.example.demo.service.ClienteService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,35 +20,38 @@ public class ClienteController {
 
     private final ClienteService service;
 
+    @Qualifier("default")
+    private final ModelMapper mapper;
     @GetMapping
-    public ResponseEntity<List<Cliente>> listar() throws Exception {
-       List<Cliente> list= service.findAll();
+    public ResponseEntity<List<ClienteDTO>> listar() throws Exception {
+       List<ClienteDTO> list= service.findAll().stream()
+               .map(c->mapper.map(c,ClienteDTO.class)).toList();
         return ResponseEntity.status(200).body(list);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Cliente>> buscar(@PathVariable("id")Integer id) throws Exception {
+    public ResponseEntity<Optional<ClienteDTO>> buscar(@PathVariable("id")Integer id) throws Exception {
         Optional<Cliente> cliente= service.findById(id);
-        return ResponseEntity.status(200).body(cliente);
+        return ResponseEntity.status(200).body(Optional.ofNullable(mapper.map(cliente, ClienteDTO.class)));
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> agregar(@RequestBody Cliente cliente)throws Exception{
-        Cliente cli=service.insert(cliente);
-        return ResponseEntity.status(201).body(cli);
+    public ResponseEntity<ClienteDTO> agregar(@Valid @RequestBody ClienteDTO cliente)throws Exception{
+        Cliente cli=service.insert(mapper.map(cliente,Cliente.class));
+        return ResponseEntity.status(201).body(mapper.map(cli,ClienteDTO.class));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> actualizar(@RequestBody Cliente cliente,@PathVariable("id")Integer id)throws Exception{
-        Cliente cli=service.update(cliente,id);
-        return ResponseEntity.status(200).body(cli);
+    public ResponseEntity<ClienteDTO> actualizar(@Valid @RequestBody ClienteDTO cliente,@PathVariable("id")Integer id)throws Exception{
+        Cliente cli=service.update(mapper.map(cliente,Cliente.class),id);
+        return ResponseEntity.status(200).body(mapper.map(cli,ClienteDTO.class));
 
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Cliente> eliminar(@PathVariable("id") Integer id)throws Exception{
+    public ResponseEntity<Void> eliminar(@PathVariable("id") Integer id)throws Exception{
         service.delete(id);
-        return ResponseEntity.status(200).build();
+        return ResponseEntity.status(204).build();
     }
 
 

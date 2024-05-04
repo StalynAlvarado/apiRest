@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.Producto;
 import com.example.demo.repository.ProductoRepository;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class   ProductoServiceImp implements ProductoService {
@@ -41,10 +43,15 @@ public class   ProductoServiceImp implements ProductoService {
 		return repoPro.findAll(pageable);
 	}
 
+	@Override
+	public List<Producto> buscarProductoPorNombre(String nombre) {
+		return repoPro.buscarProductoPorNombre(nombre);
+	}
+
 
 	@Override
 	public Producto update(Producto producto, Integer idPro) {
-		producto.setIdPro(idPro);
+		producto.setIdProducto(idPro);
 		return repoPro.save(producto);
 		
 	}

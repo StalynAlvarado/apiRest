@@ -19,7 +19,6 @@ public class DetalleVenta {
     private Producto producto;
     @ManyToOne
     @JoinColumn(name = "idVenta")
-    @JsonBackReference
     private Venta venta;
     private int cantidad;
     private double total;

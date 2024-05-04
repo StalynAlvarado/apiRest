@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -27,7 +28,6 @@ public class Venta {
     private double impuesto;
 
     @OneToMany(mappedBy = "venta",cascade = CascadeType.ALL)
-    @JsonManagedReference
     private List<DetalleVenta> detalle;
 
 }

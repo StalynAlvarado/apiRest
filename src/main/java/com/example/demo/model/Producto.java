@@ -15,12 +15,11 @@ public class Producto {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer idPro;
+	private Integer idProducto;
 	@Column(nullable = false)
 	private String nombre;
 	@Column(nullable = false)
 	private double precio;
-	@JsonIncludeProperties(value = {"idCategoria","nombre"})
 	@ManyToOne
 	@JoinColumn(name = "idCategoria" ,nullable = false)
 	private Categoria categoria;
