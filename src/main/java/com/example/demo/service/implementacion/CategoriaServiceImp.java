@@ -25,11 +25,6 @@ public class CategoriaServiceImp implements CategoriaService {
     }
 
     @Override
-
-
-
-
-    @Transactional(rollbackFor = Exception.class)
     public Categoria insert(Categoria categoria) {
         return repository.save(categoria);
     }
