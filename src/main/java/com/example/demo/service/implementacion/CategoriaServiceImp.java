@@ -5,9 +5,7 @@ import com.example.demo.model.Categoria;
 import com.example.demo.repository.CategoriaRepository;
 import com.example.demo.service.CategoriaService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -41,7 +39,11 @@ public class CategoriaServiceImp implements CategoriaService {
 
     @Override
     public void delete(Integer id) throws Exception {
-repository.deleteById(id);
+    	if(repository.existsById(id)) {
+repository.deleteById(id);}
+    	else {
+			throw new NoSuchElementException("No existe la categoria: "+id);
+		}
     }
 
     @Override

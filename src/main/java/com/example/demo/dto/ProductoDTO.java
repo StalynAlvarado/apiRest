@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.Categoria;
+
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import jakarta.validation.constraints.NotNull;
@@ -31,5 +31,9 @@ public class ProductoDTO {
 	
 
 
+	
+	
+	
+	
 	
 }

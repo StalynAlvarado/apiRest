@@ -1,10 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Cliente;
-import com.example.demo.model.Venta;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
+import com.example.demo.model.Venta;
 import java.util.List;
 import java.util.Optional;
 

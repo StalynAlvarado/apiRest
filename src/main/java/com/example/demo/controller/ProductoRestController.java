@@ -86,4 +86,14 @@ public class ProductoRestController {
 			.toList();
 		return ResponseEntity.ok(dtoList);
 	}
+	
+	@GetMapping("/search/categoria")
+	public ResponseEntity<List<ProductoDTO>> buscarProductoPorCategoria(@RequestParam(name = "nombre") String nombre){
+
+	List<Producto> list=serProducto.buscarProductosPorCategoria(nombre);
+	List<ProductoDTO>dtoList= list.stream()
+			.map(p->mapper.map(p,ProductoDTO.class))
+			.toList();
+		return ResponseEntity.ok(dtoList);
+	}
 }

@@ -1,7 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.Producto;
-import com.example.demo.model.Venta;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;

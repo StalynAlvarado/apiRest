@@ -34,6 +34,13 @@ public class ClienteController {
         Optional<Cliente> cliente= service.findById(id);
         return ResponseEntity.status(200).body(Optional.ofNullable(mapper.map(cliente, ClienteDTO.class)));
     }
+    
+    @GetMapping("/search")
+    public ResponseEntity<ClienteDTO> buscarClientePorDni(@RequestParam(name = "dni")String dni) throws Exception{
+    	
+    	Cliente cliente=service.findByDni(dni);
+    	return ResponseEntity.status(200).body(mapper.map(cliente,ClienteDTO.class));
+    }
 
     @PostMapping
     public ResponseEntity<ClienteDTO> agregar(@Valid @RequestBody ClienteDTO cliente)throws Exception{

@@ -14,4 +14,5 @@ public interface ClienteService {
     Cliente update(Cliente cliente,Integer id)throws Exception;
     void delete(Integer id)throws Exception;
     Optional<Cliente> findById(Integer id)throws Exception;
+    Cliente findByDni(String dni)throws Exception;
 }

@@ -41,4 +41,10 @@ repository.deleteById(id);
     public Optional<Cliente> findById(Integer id) throws Exception {
         return repository.findById(id);
     }
+
+	@Override
+	public Cliente findByDni(String dni) throws Exception {
+		// TODO Auto-generated method stub
+		return repository.findByDni(dni);
+	}
 }

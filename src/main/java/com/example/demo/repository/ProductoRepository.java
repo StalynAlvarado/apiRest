@@ -11,7 +11,9 @@ import java.util.List;
 public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
     @Query(value = "From Producto p where p.nombre like :nombre%")
-List<Producto> buscarProductoPorNombre(String nombre);
+    List<Producto> buscarProductoPorNombre(String nombre);
 	
+    @Query(value="From Producto p where p.categoria.nombre = :nombreCategoria")
+    List<Producto> buscarProductosPorCategoria(String nombreCategoria);
 	
 }

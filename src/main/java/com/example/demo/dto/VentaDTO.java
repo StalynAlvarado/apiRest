@@ -1,7 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.Cliente;
-import com.example.demo.model.DetalleVenta;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.validation.constraints.NotNull;

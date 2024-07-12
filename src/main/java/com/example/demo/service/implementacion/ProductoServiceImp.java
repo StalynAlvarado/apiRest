@@ -56,5 +56,12 @@ public class   ProductoServiceImp implements ProductoService {
 		
 	}
 
+
+	@Override
+	public List<Producto> buscarProductosPorCategoria(String nombreCategoria) {
+		
+		return repoPro.buscarProductosPorCategoria(nombreCategoria);
+	}
+
 	
 }

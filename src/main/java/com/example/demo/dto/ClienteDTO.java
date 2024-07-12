@@ -2,6 +2,7 @@ package com.example.demo.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class ClienteDTO {
     @Size(min = 9,max = 9)
     private String telefono;
     @NotNull
+    @Pattern(regexp = "[0-9]+" ,message = "Solo se permite el ingreso de numeros")
     @Size(min = 8 ,max = 8)
     private String dni;
     @NotNull

@@ -14,4 +14,5 @@ public interface ProductoService {
 	 Producto findById(Integer idPro);
 	Page<Producto> findAll(Pageable pageable);
 	List<Producto> buscarProductoPorNombre(String nombre);
+	List<Producto> buscarProductosPorCategoria(String nombreCategoria);
 }
